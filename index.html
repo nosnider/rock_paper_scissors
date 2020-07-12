@@ -6,20 +6,26 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div>
-    <div id="player-score">
-      <span>you</span>
-      <span>0</span>
+  <div class="scoreboard">
+    <div id="player-score" class="score">
+      <h1>you</h1>
+      <p class='scores'>0</p>
     </div>
-    <div id="computer-score">
-      <span>computer</span>
-      <span>0</span>
+    <div id="computer-score" class="score">
+      <h1>computer</h1>
+      <p class='scores'>0</p>
     </div>
+  </div>
+  <div class=moves>
+    <h1 id='player-alert'> </h1>
+    <h1 id='computer-alert'> </h1>
+    <h1 id='winner-alert'> </h1>
   </div>
   <div class="images">
-    <img src="images/rock.png" class=image-items>
-    <img src="images/paper.png" class=image-items>
-    <img src="images/scissors.png" class=image-items>
+    <img src="images/rock.png" class=image-items id='rock'>
+    <img src="images/paper.png" class=image-items id='paper'>
+    <img src="images/scissors.png" class=image-items id='scissors'>
   </div>
+<script src='scripts.js'></script>
 </body>
 </html>

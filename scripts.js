@@ -4,7 +4,16 @@ function computerPlay(){
   return moves[choice]
 }
 
-function playRound(playerSelection, computerSelection){
+function playRound(input){
+  let playerSelection
+  let computerSelection
+  let playerScore
+  playerScore = Number(document.getElementsByClassName('scores')[0].innerHTML)
+  let computerScore
+  computerScore = Number(document.getElementsByClassName('scores')[1].innerHTML)
+
+  playerSelection = input
+  computerSelection = computerPlay()
   //make sure input case matches
   playerSelection = playerSelection.toLowerCase()
   computerSelection = computerSelection.toLowerCase()
@@ -19,75 +28,80 @@ function playRound(playerSelection, computerSelection){
   else if (playerSelection === 'rock'){
     if (computerSelection === 'paper'){
       winner = "computer"
+      computerScore ++
+      document.getElementsByClassName('scores')[1].innerHTML = computerScore
     }
     else {
       winner = "player"
+      playerScore ++
+      document.getElementsByClassName('scores')[0].innerHTML = playerScore
     }
   }
   // test logic for where player selects Scissors
   else if (playerSelection === 'scissors'){
     if (computerSelection === 'rock'){
       winner = 'computer'
+      computerScore ++
+      document.getElementsByClassName('scores')[1].innerHTML = computerScore
     }
     else {
       winner = 'player'
+      playerScore ++
+      document.getElementsByClassName('scores')[0].innerHTML = playerScore
     }
   }
   // test logic for where player selects paper
   else if (playerSelection === 'paper'){
     if (computerSelection === 'scissors'){
       winner = 'computer'
+      computerScore ++
+      document.getElementsByClassName('scores')[1].innerHTML = computerScore
     }
     else {
       winner = 'player'
+      playerScore ++
+      document.getElementsByClassName('scores')[0].innerHTML = playerScore
     }
   }
-  // return result
-  if (winner === "tie"){
-    return ["The result is a tie!",winner]
+
+  document.getElementById('player-alert').innerHTML = `you selected ${playerSelection}`
+  document.getElementById('computer-alert').innerHTML = `the computer selected ${computerSelection}`
+  //return result
+    if (winner === "tie"){
+    document.getElementById('winner-alert').innerHTML = "the result is a tie"
   } else {
-    return [`the winner is the ${winner}`,winner]
-  }
-}
-
-function playerInput(){
-  let playerSelection
-  while (true){
-    playerSelection = prompt('rock, paper or scissors?')
-    playerSelection = playerSelection.toLowerCase()
-    if (playerSelection === ''){
-      alert('please enter a value')
-    }
-    else{
-      break
-    }
-  }
-  return playerSelection
-}
-
-function game(){
-  let playerScore = 0
-  let computerScore = 0
-
-  while ( (playerScore < 3 && computerScore < 3) ) {
-    console.log(`score - player:${playerScore} computer:${computerScore}`)
-    let playerSelection = playerInput()
-    let computerSelection = computerPlay()
-    console.log(`player selection: ${playerSelection}`)
-    console.log(`computer selection: ${computerSelection}`)
-    let results = playRound(playerSelection,computerSelection)
-    console.log(results[0])
-    if (results[1] == 'player') {
-      playerScore++
-    } else if (results[1] == 'computer') {
-      computerScore++
-    }
+    document.getElementById('winner-alert').innerHTML = `the ${winner} won!`
   }
 
   if (playerScore === 3){
     alert('The player has won!')
-  } else {
+    document.getElementById('player-alert').innerHTML = ""
+    document.getElementById('computer-alert').innerHTML = ""
+    document.getElementById('winner-alert').innerHTML = ""
+    document.getElementsByClassName('scores')[0].innerHTML = 0
+    document.getElementsByClassName('scores')[1].innerHTML = 0
+  } else if (computerScore === 3) {
     alert('The computer has won!')
-  }
-
+    document.getElementById('player-alert').innerHTML = ""
+    document.getElementById('computer-alert').innerHTML = ""
+    document.getElementById('winner-alert').innerHTML = ""
+    document.getElementsByClassName('scores')[0].innerHTML = 0
+    document.getElementsByClassName('scores')[1].innerHTML = 0
+  } else {}
 }
+
+
+//initialize button objects
+const rock_button = document.querySelector('#rock')
+const paper_button = document.querySelector('#paper')
+const scissors_button = document.querySelector('#scissors')
+
+rock_button.addEventListener("click", function(){
+  playRound('rock');
+});
+paper_button.addEventListener("click", function(){
+  playRound('paper');
+});
+scissors_button.addEventListener("click", function(){
+  playRound('scissors');
+});
