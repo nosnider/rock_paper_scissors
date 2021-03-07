@@ -1,1 +1,2 @@
-# rock_paper_scissors
+# Rock Paper Scissors App
+Simple Rock Paper Scissors simulation.
